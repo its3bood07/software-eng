@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ملخص الفاينل | Final Summary</title>
+<style>
+  :root{
+    --ink:#2e3a46;
+    --muted:#7c8a98;
+    --bg:#f3f1ea;
+    --card:#fffefb;
+    --border:#e6e1d4;
+    --sage:#7c9885;
+    --sage-deep:#5a7a64;
+    --sage-pale:#e7efe9;
+    --clay:#c1876b;
+    --clay-pale:#f5e8e0;
+    --gold-pale:#faf3e0;
+    --gold-line:#e3d6ab;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Tahoma, Arial, sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.75;
+  }
+  header{
+    background:var(--sage-deep);
+    color:#fbfaf6;
+    padding:26px 16px 18px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:50;
+    box-shadow:0 2px 10px rgba(40,60,50,.12);
+  }
+  header h1{
+    margin:0 0 4px;
+    font-size:1.35rem;
+    font-weight:600;
+    letter-spacing:.2px;
+  }
+  header p{
+    margin:0;
+    color:#d9e7dd;
+    font-size:.85rem;
+  }
+  .lang-toggle{
+    margin-top:13px;
+    display:inline-flex;
+    background:rgba(255,255,255,.14);
+    border-radius:30px;
+    padding:3px;
+    gap:3px;
+  }
+  .lang-toggle button{
+    border:none;
+    background:transparent;
+    color:#eef3ee;
+    padding:6px 18px;
+    border-radius:24px;
+    cursor:pointer;
+    font-weight:600;
+    font-size:.82rem;
+    transition:.2s;
+  }
+  .lang-toggle button.active{
+    background:#fbfaf6;
+    color:var(--sage-deep);
+  }
+  nav.tabs{
+    position:sticky;
+    top:97px;
+    background:#fffefb;
+    z-index:40;
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    overflow-x:auto;
+    -ms-overflow-style:none;
+    scrollbar-width:none;
+    padding:10px 10px;
+    border-bottom:1px solid var(--border);
+    box-shadow:0 2px 6px rgba(40,60,50,.05);
+  }
+  nav.tabs::-webkit-scrollbar{display:none;}
+  nav.tabs button{
+    flex:0 0 auto;
+    background:var(--bg);
+    border:1px solid var(--border);
+    color:var(--muted);
+    padding:9px 16px;
+    font-size:.85rem;
+    font-weight:600;
+    cursor:pointer;
+    border-radius:30px;
+    white-space:nowrap;
+    transition:.2s;
+  }
+  nav.tabs button:hover{
+    border-color:var(--sage);
+    color:var(--sage-deep);
+  }
+  nav.tabs button.active{
+    background:var(--sage-deep);
+    border-color:var(--sage-deep);
+    color:#fff;
+  }
+  main{
+    max-width:840px;
+    margin:0 auto;
+    padding:22px 16px 60px;
+  }
+  .chapter{display:none;}
+  .chapter.active{display:block; animation:fade .3s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+  .chapter-title{
+    font-size:1.25rem;
+    font-weight:700;
+    color:var(--sage-deep);
+    padding-bottom:12px;
+    margin:4px 0 20px;
+    border-bottom:1px solid var(--gold-line);
+  }
+  .section{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:18px 20px;
+    margin-bottom:16px;
+    box-shadow:0 1px 2px rgba(40,40,30,.03);
+  }
+  .section h3{
+    margin:0 0 12px;
+    font-size:1.02rem;
+    font-weight:700;
+    color:var(--sage-deep);
+    display:flex;
+    align-items:center;
+    gap:9px;
+  }
+  .section h3::before{
+    content:"";
+    width:7px;height:7px;
+    background:var(--clay);
+    border-radius:50%;
+    flex:0 0 auto;
+  }
+  .section ul{
+    margin:0;
+    padding-inline-start:20px;
+  }
+  .section li{margin-bottom:8px;}
+  .section li::marker{color:var(--sage);}
+  .section p{margin:0 0 10px; color:var(--ink);}
+  .key-points{
+    background:var(--gold-pale);
+    border:1px solid var(--gold-line);
+    border-radius:16px;
+    padding:16px 20px;
+    margin-top:20px;
+  }
+  .key-points h3{
+    color:#9c7a2e;
+    margin-top:0;
+  }
+  .key-points h3::before{background:#c9a23c;}
+  .badge{
+    display:inline-block;
+    background:var(--sage-pale);
+    color:var(--sage-deep);
+    font-size:.7rem;
+    font-weight:700;
+    padding:4px 12px;
+    border-radius:20px;
+    margin-bottom:12px;
+    letter-spacing:.2px;
+  }
+  .grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  @media (max-width:560px){
+    .grid2{grid-template-columns:1fr;}
+    header h1{font-size:1.12rem;}
+    .chapter-title{font-size:1.08rem;}
+    nav.tabs{top:90px;}
+    .section{padding:15px 16px;}
+  }
+  .mini-card{
+    background:var(--sage-pale);
+    border:1px solid #d9e6dd;
+    border-radius:12px;
+    padding:12px 14px;
+    font-size:.92rem;
+  }
+  .mini-card b{color:var(--sage-deep);}
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:.78rem;
+    padding:26px 12px 44px;
+  }
+  [dir="ltr"] .section ul{padding-inline-start:20px;}
+  .quote{
+    background:var(--clay-pale);
+    border-inline-start:3px solid var(--clay);
+    padding:10px 14px;
+    color:#7a5240;
+    font-style:italic;
+    font-size:.92rem;
+    margin:10px 0;
+    border-radius:0 10px 10px 0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1 id="mainTitle">ملخص شامل للفاينل — Software Engineering</h1>
+  <p id="subTitle">الفصل 3: Agile · الفصل 4: Requirements Engineering · الفصل 8: Software Testing</p>
+  <div class="lang-toggle">
+    <button id="btnAr" class="active" onclick="setLang('ar')">العربية</button>
+    <button id="btnEn" onclick="setLang('en')">English</button>
+  </div>
+</header>
+
+<nav class="tabs" id="tabsNav">
+  <button class="tab-btn active" data-target="ch3" onclick="showChapter('ch3')">📘 <span data-ar="الفصل 3 — Agile" data-en="Ch.3 — Agile">الفصل 3 — Agile</span></button>
+  <button class="tab-btn" data-target="ch4" onclick="showChapter('ch4')">📗 <span data-ar="الفصل 4 — Requirements" data-en="Ch.4 — Requirements">الفصل 4 — Requirements</span></button>
+  <button class="tab-btn" data-target="ch8" onclick="showChapter('ch8')">📙 <span data-ar="الفصل 8 — Testing" data-en="Ch.8 — Testing">الفصل 8 — Testing</span></button>
+</nav>
+
+<main id="mainContent">
+
+<!-- ===================== CHAPTER 3 ===================== -->
+<section class="chapter active" id="ch3">
+  <h2 class="chapter-title" data-ar="الفصل 3: تطوير البرمجيات الرشيق (Agile Software Development)" data-en="Chapter 3: Agile Software Development">الفصل 3: تطوير البرمجيات الرشيق (Agile Software Development)</h2>
+
+  <div class="section">
+    <span class="badge" data-ar="الحاجة للتطوير السريع" data-en="Need for Rapid Development">الحاجة للتطوير السريع</span>
+    <h3 data-ar="لماذا التطوير السريع؟" data-en="Why Rapid Development?">لماذا التطوير السريع؟</h3>
+    <p data-ar="يتم تطوير البرمجيات بسرعة للاستفادة من الفرص الجديدة ومواجهة الضغط التنافسي. أصبح التسليم السريع أهم متطلب، وكثير من الشركات تضحي بجزء من الجودة أو المتطلبات لتسريع التسليم." data-en="New software is developed quickly to seize new opportunities and respond to competitive pressure. Rapid delivery has become the most critical requirement; many businesses trade off quality or requirements for faster deployment.">
+    يتم تطوير البرمجيات بسرعة للاستفادة من الفرص الجديدة ومواجهة الضغط التنافسي. أصبح التسليم السريع أهم متطلب، وكثير من الشركات تضحي بجزء من الجودة أو المتطلبات لتسريع التسليم.
+    </p>
+    <p data-ar="العمليات التقليدية (مثل شلال Waterfall) التي تحدد المتطلبات بالكامل أولًا ثم تصمم وتبني وتختبر، غير مناسبة للتطوير السريع، لأن أي تغيير بالمتطلبات يتطلب إعادة عمل وإعادة اختبار، فيتأخر التسليم." data-en="Conventional waterfall/specification-based processes that fully specify requirements before design/build/test aren't suited to rapid development — requirement changes force rework and retesting, delaying delivery.">
+    العمليات التقليدية (مثل شلال Waterfall) التي تحدد المتطلبات بالكامل أولًا ثم تصمم وتبني وتختبر، غير مناسبة للتطوير السريع، لأن أي تغيير بالمتطلبات يتطلب إعادة عمل وإعادة اختبار، فيتأخر التسليم.
+    </p>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="المنهجيات الرشيقة (Agile Methods)" data-en="Agile Methods">المنهجيات الرشيقة (Agile Methods)</h3>
+    <p data-ar="نشأت Agile كرد فعل على الأعباء الكبيرة لطرق التصميم في الثمانينات والتسعينات. تتميز بأنها:" data-en="Agile emerged as dissatisfaction with the overheads of 1980s/90s design methods. Agile methods:">
+    نشأت Agile كرد فعل على الأعباء الكبيرة لطرق التصميم في الثمانينات والتسعينات. تتميز بأنها:
+    </p>
+    <ul>
+      <li data-ar="تركز على الكود أكثر من التصميم" data-en="Focus on code rather than design">تركز على الكود أكثر من التصميم</li>
+      <li data-ar="تعتمد على أسلوب تكراري (Iterative)" data-en="Based on an iterative approach">تعتمد على أسلوب تكراري (Iterative)</li>
+      <li data-ar="هدفها تسليم برمجيات تعمل بسرعة وتطويرها لمواكبة تغير المتطلبات" data-en="Aim to deliver working software quickly and evolve it with changing requirements">هدفها تسليم برمجيات تعمل بسرعة وتطويرها لمواكبة تغير المتطلبات</li>
+      <li data-ar="تقليل الأعباء (مثل تقليل التوثيق) والاستجابة السريعة للتغيير دون إعادة عمل كبيرة" data-en="Reduce overheads (e.g. limited documentation) and respond quickly to change without excessive rework">تقليل الأعباء (مثل تقليل التوثيق) والاستجابة السريعة للتغيير دون إعادة عمل كبيرة</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="أين تنجح Agile وأين تواجه مشاكل؟" data-en="Applicability & Problems">أين تنجح Agile وأين تواجه مشاكل؟</h3>
+    <div class="grid2">
+      <div class="mini-card">
+        <b data-ar="تنجح في:" data-en="Succeeds in:">تنجح في:</b>
+        <ul>
+          <li data-ar="تطوير منتج صغير/متوسط للبيع" data-en="Small/medium product development for sale">تطوير منتج صغير/متوسط للبيع</li>
+          <li data-ar="أنظمة مخصصة داخل منظمة مع التزام واضح من العميل وعدم وجود قيود خارجية كثيرة" data-en="Custom in-house systems with clear customer commitment, few external regulations">أنظمة مخصصة داخل منظمة مع التزام واضح من العميل وعدم وجود قيود خارجية كثيرة</li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <b data-ar="مشاكلها:" data-en="Problems:">مشاكلها:</b>
+        <ul>
+          <li data-ar="صعوبة التوسع للأنظمة الكبيرة" data-en="Hard to scale to large systems">صعوبة التوسع للأنظمة الكبيرة</li>
+          <li data-ar="صعوبة الحفاظ على اهتمام العملاء المشاركين" data-en="Hard to maintain customer interest/involvement">صعوبة الحفاظ على اهتمام العملاء المشاركين</li>
+          <li data-ar="بعض أعضاء الفريق قد لا يناسبهم التفاعل الكثيف" data-en="Some team members unsuited to intense involvement">بعض أعضاء الفريق قد لا يناسبهم التفاعل الكثيف</li>
+          <li data-ar="صعوبة ترتيب الأولويات مع تعدد أصحاب المصلحة" data-en="Hard to prioritize with multiple stakeholders">صعوبة ترتيب الأولويات مع تعدد أصحاب المصلحة</li>
+          <li data-ar="الحفاظ على البساطة يتطلب جهداً إضافياً تحت الضغط" data-en="Maintaining simplicity takes extra work under schedule pressure">الحفاظ على البساطة يتطلب جهداً إضافياً تحت الضغط</li>
+          <li data-ar="العقود قد تكون مشكلة كما في التطوير التكراري" data-en="Contracts can be problematic, as with iterative development generally">العقود قد تكون مشكلة كما في التطوير التكراري</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="البرمجة القصوى (Extreme Programming – XP)" data-en="Extreme Programming (XP)">البرمجة القصوى (Extreme Programming – XP)</h3>
+    <p data-ar="أشهر وأكثر منهجيات Agile استخدامًا. تأخذ مبادئ التطوير التكراري إلى أقصى حد:" data-en="The best-known and most widely used agile method. Pushes good iterative practices to 'extreme' levels:">
+    أشهر وأكثر منهجيات Agile استخدامًا. تأخذ مبادئ التطوير التكراري إلى أقصى حد:
+    </p>
+    <ul>
+      <li data-ar="نسخ جديدة عدة مرات يوميًا" data-en="New versions built several times a day">نسخ جديدة عدة مرات يوميًا</li>
+      <li data-ar="تسليم زيادات (increments) للعميل كل أسبوعين" data-en="Increments delivered to customers every 2 weeks">تسليم زيادات (increments) للعميل كل أسبوعين</li>
+      <li data-ar="يجب تشغيل كل الاختبارات لكل بناء (build)، ولا يُقبل البناء إلا إذا نجحت كل الاختبارات" data-en="All tests run for every build; build only accepted if tests succeed">يجب تشغيل كل الاختبارات لكل بناء (build)، ولا يُقبل البناء إلا إذا نجحت كل الاختبارات</li>
+      <li data-ar="المتطلبات تُعبَّر كسيناريوهات تُسمى 'قصص المستخدم' (User Stories) تُنفَّذ كسلسلة مهام" data-en="Requirements expressed as 'user stories' implemented as a series of tasks">المتطلبات تُعبَّر كسيناريوهات تُسمى 'قصص المستخدم' (User Stories) تُنفَّذ كسلسلة مهام</li>
+      <li data-ar="المبرمجون يعملون في أزواج، ويكتبون الاختبارات قبل الكود" data-en="Programmers work in pairs and write tests before code">المبرمجون يعملون في أزواج، ويكتبون الاختبارات قبل الكود</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="XP ومبادئ Agile" data-en="XP and Agile Principles">XP ومبادئ Agile</h3>
+    <ul>
+      <li data-ar="التطوير التزايدي: إصدارات صغيرة ومتكررة مبنية على قصص العميل" data-en="Incremental development: small frequent releases based on customer stories">التطوير التزايدي: إصدارات صغيرة ومتكررة مبنية على قصص العميل</li>
+      <li data-ar="مشاركة العميل بدوام كامل، ومسؤول عن تعريف اختبارات القبول" data-en="Full-time customer involvement; defines acceptance tests">مشاركة العميل بدوام كامل، ومسؤول عن تعريف اختبارات القبول</li>
+      <li data-ar="الأشخاص لا العمليات: برمجة زوجية، ملكية جماعية للكود، تجنب ساعات العمل الطويلة" data-en="People not process: pair programming, collective ownership, avoiding long hours">الأشخاص لا العمليات: برمجة زوجية، ملكية جماعية للكود، تجنب ساعات العمل الطويلة</li>
+      <li data-ar="دعم التغيير من خلال إصدارات منتظمة" data-en="Change supported through regular releases">دعم التغيير من خلال إصدارات منتظمة</li>
+      <li data-ar="الحفاظ على البساطة عبر إعادة الهيكلة المستمرة (Refactoring)" data-en="Simplicity maintained through constant refactoring">الحفاظ على البساطة عبر إعادة الهيكلة المستمرة (Refactoring)</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="التطوير القائم على الاختبار أولًا (Test-First Development)" data-en="Test-First Development">التطوير القائم على الاختبار أولًا (Test-First Development)</h3>
+    <ul>
+      <li data-ar="كتابة الاختبارات قبل الكود توضّح المتطلبات المطلوب تنفيذها" data-en="Writing tests before code clarifies requirements">كتابة الاختبارات قبل الكود توضّح المتطلبات المطلوب تنفيذها</li>
+      <li data-ar="تُكتب الاختبارات كبرامج (وليس بيانات) ليتم تشغيلها تلقائيًا، وتتحقق هي بنفسها من صحة التنفيذ" data-en="Tests written as programs (not data) so they run automatically and self-check">تُكتب الاختبارات كبرامج (وليس بيانات) ليتم تشغيلها تلقائيًا، وتتحقق هي بنفسها من صحة التنفيذ</li>
+      <li data-ar="غالبًا تعتمد على إطار اختبار مثل JUnit" data-en="Usually relies on a testing framework like JUnit">غالبًا تعتمد على إطار اختبار مثل JUnit</li>
+      <li data-ar="تُشغَّل كل الاختبارات القديمة والجديدة تلقائيًا عند إضافة وظيفة جديدة للتأكد من عدم وجود أخطاء" data-en="All old and new tests run automatically whenever new functionality is added">تُشغَّل كل الاختبارات القديمة والجديدة تلقائيًا عند إضافة وظيفة جديدة للتأكد من عدم وجود أخطاء</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="البرمجة الزوجية (Pair Programming)" data-en="Pair Programming">البرمجة الزوجية (Pair Programming)</h3>
+    <ul>
+      <li data-ar="مبرمجان يجلسان معًا لكتابة الكود" data-en="Two programmers sit together to develop code">مبرمجان يجلسان معًا لكتابة الكود</li>
+      <li data-ar="يُنمّي ملكية جماعية للكود وينشر المعرفة بين الفريق" data-en="Develops common code ownership and spreads knowledge">يُنمّي ملكية جماعية للكود وينشر المعرفة بين الفريق</li>
+      <li data-ar="يعمل كمراجعة غير رسمية لأن كل سطر يراه أكثر من شخص" data-en="Acts as informal review since each line is seen by more than one person">يعمل كمراجعة غير رسمية لأن كل سطر يراه أكثر من شخص</li>
+      <li data-ar="الأزواج تتغيّر باستمرار، فتقل المخاطر عند مغادرة أحد أعضاء الفريق" data-en="Pairs rotate dynamically, reducing risk when a member leaves">الأزواج تتغيّر باستمرار، فتقل المخاطر عند مغادرة أحد أعضاء الفريق</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="سكرَم (Scrum)" data-en="Scrum">سكرَم (Scrum)</h3>
+    <p data-ar="منهجية رشيقة عامة تركّز على إدارة التطوير التكراري وليس على ممارسات برمجية محددة. تتكون من 3 مراحل:" data-en="A general agile method focused on managing iterative development rather than specific practices. Has 3 phases:">
+    منهجية رشيقة عامة تركّز على إدارة التطوير التكراري وليس على ممارسات برمجية محددة. تتكون من 3 مراحل:
+    </p>
+    <ul>
+      <li data-ar="التخطيط الأولي: تحديد الأهداف العامة وتصميم البنية المعمارية" data-en="Outline planning: establishing objectives and designing architecture">التخطيط الأولي: تحديد الأهداف العامة وتصميم البنية المعمارية</li>
+      <li data-ar="دورات السبرنت (Sprint cycles): كل دورة تطور زيادة من النظام" data-en="Sprint cycles: each develops a system increment">دورات السبرنت (Sprint cycles): كل دورة تطور زيادة من النظام</li>
+      <li data-ar="إغلاق المشروع: استكمال التوثيق وتقييم الدروس المستفادة" data-en="Project closure: documentation completed, lessons assessed">إغلاق المشروع: استكمال التوثيق وتقييم الدروس المستفادة</li>
+    </ul>
+    <h3 style="margin-top:14px" data-ar="دورة السبرنت" data-en="The Sprint Cycle">دورة السبرنت</h3>
+    <ul>
+      <li data-ar="مدة ثابتة عادة 2-4 أسابيع" data-en="Fixed length, normally 2–4 weeks">مدة ثابتة عادة 2-4 أسابيع</li>
+      <li data-ar="نقطة البداية هي Product Backlog (قائمة الأعمال المطلوبة)" data-en="Starting point is the product backlog">نقطة البداية هي Product Backlog (قائمة الأعمال المطلوبة)</li>
+      <li data-ar="فريق المشروع يختار مع العميل الميزات التي ستُطوَّر في السبرنت" data-en="Team selects features/functionality with the customer">فريق المشروع يختار مع العميل الميزات التي ستُطوَّر في السبرنت</li>
+      <li data-ar="أثناء التطوير يُعزل الفريق عن العميل، وكل التواصل يمر عبر 'Scrum Master'" data-en="During development the team is isolated; communication goes through the Scrum Master">أثناء التطوير يُعزل الفريق عن العميل، وكل التواصل يمر عبر 'Scrum Master'</li>
+      <li data-ar="دور Scrum Master: حماية الفريق من المشتتات الخارجية" data-en="Scrum Master's role: protect the team from external distractions">دور Scrum Master: حماية الفريق من المشتتات الخارجية</li>
+      <li data-ar="بنهاية السبرنت تُراجَع وتُعرَض النتائج على أصحاب المصلحة" data-en="At sprint end, work is reviewed and presented to stakeholders">بنهاية السبرنت تُراجَع وتُعرَض النتائج على أصحاب المصلحة</li>
+    </ul>
+    <h3 style="margin-top:14px" data-ar="فوائد Scrum" data-en="Scrum Benefits">فوائد Scrum</h3>
+    <ul>
+      <li data-ar="تقسيم المنتج لأجزاء مفهومة وقابلة للإدارة" data-en="Product broken into manageable, understandable chunks">تقسيم المنتج لأجزاء مفهومة وقابلة للإدارة</li>
+      <li data-ar="عدم استقرار المتطلبات لا يوقف التقدم" data-en="Unstable requirements don't hold up progress">عدم استقرار المتطلبات لا يوقف التقدم</li>
+      <li data-ar="شفافية كاملة للفريق وتحسّن في التواصل" data-en="Full team visibility, improved communication">شفافية كاملة للفريق وتحسّن في التواصل</li>
+      <li data-ar="تسليم منتظم للزيادات وثقة متبادلة بين العميل والمطورين" data-en="On-time delivery of increments and trust between customer and developers">تسليم منتظم للزيادات وثقة متبادلة بين العميل والمطورين</li>
+    </ul>
+  </div>
+
+  <div class="key-points">
+    <h3 data-ar="✅ نقاط مفتاحية - الفصل 3" data-en="✅ Key Points - Chapter 3">✅ نقاط مفتاحية - الفصل 3</h3>
+    <ul>
+      <li data-ar="من أهم قوة XP: كتابة اختبارات تلقائية قبل كتابة الميزة، ويجب نجاح كل الاختبارات عند دمج أي زيادة." data-en="A key strength of XP is developing automated tests before a feature is built; all tests must succeed when integrating an increment.">من أهم قوة XP: كتابة اختبارات تلقائية قبل كتابة الميزة، ويجب نجاح كل الاختبارات عند دمج أي زيادة.</li>
+      <li data-ar="Scrum إطار إدارة مشروع يعتمد على سبرنتات بفترات زمنية ثابتة." data-en="Scrum is a project management framework centered on fixed-length sprints.">Scrum إطار إدارة مشروع يعتمد على سبرنتات بفترات زمنية ثابتة.</li>
+      <li data-ar="توسيع Agile للأنظمة الكبيرة صعب، فهي تحتاج تصميمًا مسبقًا وتوثيقًا." data-en="Scaling agile to large systems is difficult; large systems need up-front design and documentation.">توسيع Agile للأنظمة الكبيرة صعب، فهي تحتاج تصميمًا مسبقًا وتوثيقًا.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== CHAPTER 4 ===================== -->
+<section class="chapter" id="ch4">
+  <h2 class="chapter-title" data-ar="الفصل 4: هندسة المتطلبات (Requirements Engineering)" data-en="Chapter 4: Requirements Engineering">الفصل 4: هندسة المتطلبات (Requirements Engineering)</h2>
+
+  <div class="section">
+    <h3 data-ar="ما هي هندسة المتطلبات؟" data-en="What is Requirements Engineering?">ما هي هندسة المتطلبات؟</h3>
+    <p data-ar="RE هي عملية تحديد الخدمات التي يحتاجها العميل من النظام، والقيود التي يعمل ويُطوَّر النظام ضمنها. المتطلبات نفسها هي أوصاف خدمات النظام والقيود الناتجة عن عملية هندسة المتطلبات." data-en="RE is the process of establishing the services the customer requires from a system, and the constraints under which it operates and is developed. The requirements are the descriptions generated during this process.">
+    RE هي عملية تحديد الخدمات التي يحتاجها العميل من النظام، والقيود التي يعمل ويُطوَّر النظام ضمنها. المتطلبات نفسها هي أوصاف خدمات النظام والقيود الناتجة عن عملية هندسة المتطلبات.
+    </p>
+    <p data-ar="المتطلب قد يكون عبارة عامة (لاستخدامها في عرض/مناقصة عقد، فتترك مجال للتفسير) أو وصفًا تفصيليًا دقيقًا (عندما يكون أساس العقد نفسه)." data-en="A requirement may range from a high-level abstract statement (used as the basis for a contract bid, open to interpretation) to a detailed formal specification (basis of the contract itself).">
+    المتطلب قد يكون عبارة عامة (لاستخدامها في عرض/مناقصة عقد، فتترك مجال للتفسير) أو وصفًا تفصيليًا دقيقًا (عندما يكون أساس العقد نفسه).
+    </p>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="أنواع المتطلبات (المستخدم والنظام)" data-en="Types of Requirement (User & System)">أنواع المتطلبات (المستخدم والنظام)</h3>
+    <div class="grid2">
+      <div class="mini-card"><b data-ar="متطلبات المستخدم User requirements" data-en="User requirements">متطلبات المستخدم</b><br>
+      <span data-ar="عبارات بلغة طبيعية + رسومات توضّح الخدمات والقيود التشغيلية، تُكتب للعملاء." data-en="Natural-language statements plus diagrams describing services and operational constraints, written for customers.">عبارات بلغة طبيعية + رسومات توضّح الخدمات والقيود التشغيلية، تُكتب للعملاء.</span></div>
+      <div class="mini-card"><b data-ar="متطلبات النظام System requirements" data-en="System requirements">متطلبات النظام</b><br>
+      <span data-ar="وثيقة منظمة تفصّل وظائف النظام وخدماته وقيوده، تُحدّد ما يجب تنفيذه وقد تكون جزءاً من العقد." data-en="A structured document detailing functions, services, and constraints; defines what must be implemented and may be part of a contract.">وثيقة منظمة تفصّل وظائف النظام وخدماته وقيوده، تُحدّد ما يجب تنفيذه وقد تكون جزءاً من العقد.</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="المتطلبات الوظيفية وغير الوظيفية ومتطلبات المجال" data-en="Functional, Non-functional & Domain Requirements">المتطلبات الوظيفية وغير الوظيفية ومتطلبات المجال</h3>
+    <ul>
+      <li data-ar="متطلبات وظيفية (Functional): عبارات عن الخدمات التي يقدمها النظام، وكيف يتفاعل مع مدخلات معينة، وقد توضّح ما لا يجب أن يفعله النظام." data-en="Functional: statements of services the system provides, how it reacts to inputs and behaves in situations; may state what it should NOT do.">متطلبات وظيفية (Functional): عبارات عن الخدمات التي يقدمها النظام، وكيف يتفاعل مع مدخلات معينة، وقد توضّح ما لا يجب أن يفعله النظام.</li>
+      <li data-ar="متطلبات غير وظيفية (Non-functional): قيود على الخدمات أو الوظائف مثل قيود الزمن، معايير التطوير، إلخ. غالبًا تنطبق على النظام ككل." data-en="Non-functional: constraints on services/functions such as timing constraints, standards; often apply to the whole system.">متطلبات غير وظيفية (Non-functional): قيود على الخدمات أو الوظائف مثل قيود الزمن، معايير التطوير، إلخ. غالبًا تنطبق على النظام ككل.</li>
+      <li data-ar="متطلبات المجال (Domain): قيود ناشئة من مجال تشغيل النظام نفسه." data-en="Domain requirements: constraints arising from the operational domain.">متطلبات المجال (Domain): قيود ناشئة من مجال تشغيل النظام نفسه.</li>
+    </ul>
+    <p class="quote" data-ar="مثال غموض: 'يجب أن يستطيع المستخدم البحث في قوائم المواعيد لكل العيادات' — هل يقصد بحثاً عبر كل العيادات أم داخل عيادة واحدة بعد اختيارها؟ هذا تفسير مختلف بين المستخدم والمطوّر." data-en="Ambiguity example: 'A user shall be able to search appointment lists for all clinics' — does this mean searching across all clinics, or within one selected clinic? User intent and developer interpretation can differ.">
+    مثال غموض: 'يجب أن يستطيع المستخدم البحث في قوائم المواعيد لكل العيادات' — هل يقصد بحثاً عبر كل العيادات أم داخل عيادة واحدة بعد اختيارها؟ هذا تفسير مختلف بين المستخدم والمطوّر.
+    </p>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="الاكتمال والاتساق (Completeness & Consistency)" data-en="Completeness & Consistency">الاكتمال والاتساق (Completeness & Consistency)</h3>
+    <ul>
+      <li data-ar="اكتمال: يجب أن تشمل وصف كل الخدمات المطلوبة من كل المستخدمين." data-en="Complete: should include descriptions of all required facilities/services.">اكتمال: يجب أن تشمل وصف كل الخدمات المطلوبة من كل المستخدمين.</li>
+      <li data-ar="اتساق: لا تعارض ولا تناقض في وصف خدمات النظام." data-en="Consistent: no conflicts or contradictions in the descriptions.">اتساق: لا تعارض ولا تناقض في وصف خدمات النظام.</li>
+      <li data-ar="عمليًا يستحيل تحقيق وثيقة متطلبات كاملة ومتسقة تمامًا، خاصة في الأنظمة الكبيرة بوجود أصحاب مصلحة متعددين." data-en="In practice impossible to produce a fully complete & consistent requirements document, especially for large multi-stakeholder systems.">عمليًا يستحيل تحقيق وثيقة متطلبات كاملة ومتسقة تمامًا، خاصة في الأنظمة الكبيرة بوجود أصحاب مصلحة متعددين.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="تصنيفات المتطلبات غير الوظيفية" data-en="Non-functional Classifications">تصنيفات المتطلبات غير الوظيفية</h3>
+    <ul>
+      <li data-ar="متطلبات المنتج Product: تخص سلوك المنتج المُسلَّم نفسه (سرعة التنفيذ، الموثوقية، الأمان، قابلية الاستخدام)." data-en="Product: how the delivered product itself must behave (performance, reliability, security, usability).">متطلبات المنتج Product: تخص سلوك المنتج المُسلَّم نفسه (سرعة التنفيذ، الموثوقية، الأمان، قابلية الاستخدام).</li>
+      <li data-ar="متطلبات تنظيمية Organisational: ناتجة عن سياسات وإجراءات المنظمة (معايير العملية، لغة البرمجة، بيئة التطوير، بيئة التشغيل)." data-en="Organisational: result of organisational policies/procedures (process standards, programming language, dev environment, operational environment).">متطلبات تنظيمية Organisational: ناتجة عن سياسات وإجراءات المنظمة (معايير العملية، لغة البرمجة، بيئة التطوير، بيئة التشغيل).</li>
+      <li data-ar="متطلبات خارجية External: ناتجة عن عوامل خارج النظام، مثل قوانين تشريعية، تنظيمية، أو أخلاقية (مثل موافقة بنك مركزي)." data-en="External: arise from factors outside the system, e.g. legislative, regulatory (such as central bank approval), or ethical requirements.">متطلبات خارجية External: ناتجة عن عوامل خارج النظام، مثل قوانين تشريعية، تنظيمية، أو أخلاقية (مثل موافقة بنك مركزي).</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="وثيقة متطلبات البرمجيات" data-en="The Software Requirements Document">وثيقة متطلبات البرمجيات</h3>
+    <p data-ar="هي البيان الرسمي لما هو مطلوب من مطوّري النظام. يجب أن تتضمن تعريف متطلبات المستخدم ومواصفات متطلبات النظام. هي ليست وثيقة تصميم: يجب أن تركّز على 'ماذا' يفعل النظام، وليس 'كيف'." data-en="The official statement of what is required of the developers. Should include both user requirements and system requirements specs. It is NOT a design document — it states WHAT the system should do, not HOW.">
+    هي البيان الرسمي لما هو مطلوب من مطوّري النظام. يجب أن تتضمن تعريف متطلبات المستخدم ومواصفات متطلبات النظام. هي ليست وثيقة تصميم: يجب أن تركّز على 'ماذا' يفعل النظام، وليس 'كيف'.
+    </p>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="عمليات هندسة المتطلبات" data-en="Requirements Engineering Processes">عمليات هندسة المتطلبات</h3>
+    <p data-ar="عملية تكرارية تتضمن الأنشطة التالية المتشابكة:" data-en="An iterative process interleaving these generic activities:">عملية تكرارية تتضمن الأنشطة التالية المتشابكة:</p>
+    <ul>
+      <li data-ar="استخراج المتطلبات (Elicitation)" data-en="Requirements elicitation">استخراج المتطلبات (Elicitation)</li>
+      <li data-ar="تحليل المتطلبات (Analysis)" data-en="Requirements analysis">تحليل المتطلبات (Analysis)</li>
+      <li data-ar="التحقق من صحة المتطلبات (Validation)" data-en="Requirements validation">التحقق من صحة المتطلبات (Validation)</li>
+      <li data-ar="إدارة المتطلبات (Management)" data-en="Requirements management">إدارة المتطلبات (Management)</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="استخراج وتحليل المتطلبات (Elicitation & Analysis)" data-en="Elicitation & Analysis">استخراج وتحليل المتطلبات (Elicitation & Analysis)</h3>
+    <p data-ar="يعمل المهندسون التقنيون مع العملاء وأصحاب المصلحة (مستخدمون، مدراء، خبراء مجال...) لاكتشاف مجال التطبيق والخدمات المطلوبة." data-en="Technical staff work with customers and stakeholders (users, managers, domain experts, etc.) to discover the application domain and required services.">
+    يعمل المهندسون التقنيون مع العملاء وأصحاب المصلحة (مستخدمون، مدراء، خبراء مجال...) لاكتشاف مجال التطبيق والخدمات المطلوبة.
+    </p>
+    <h3 style="margin-top:14px" data-ar="مشاكل تحليل المتطلبات" data-en="Problems of Requirements Analysis">مشاكل تحليل المتطلبات</h3>
+    <ul>
+      <li data-ar="أصحاب المصلحة لا يعرفون ما يريدونه فعلًا" data-en="Stakeholders don't know what they really want">أصحاب المصلحة لا يعرفون ما يريدونه فعلًا</li>
+      <li data-ar="كل صاحب مصلحة يعبّر بمصطلحاته الخاصة" data-en="Each stakeholder expresses requirements in their own terms">كل صاحب مصلحة يعبّر بمصطلحاته الخاصة</li>
+      <li data-ar="تعارض متطلبات أصحاب المصلحة المختلفين" data-en="Conflicting requirements between different stakeholders">تعارض متطلبات أصحاب المصلحة المختلفين</li>
+      <li data-ar="عوامل تنظيمية وسياسية تؤثر بالمتطلبات" data-en="Organisational/political factors influence requirements">عوامل تنظيمية وسياسية تؤثر بالمتطلبات</li>
+      <li data-ar="المتطلبات تتغير أثناء التحليل" data-en="Requirements change during analysis">المتطلبات تتغير أثناء التحليل</li>
+    </ul>
+    <h3 style="margin-top:14px" data-ar="مراحل الاستخراج والتحليل" data-en="Stages of Elicitation & Analysis">مراحل الاستخراج والتحليل</h3>
+    <ul>
+      <li data-ar="اكتشاف المتطلبات (Requirements discovery): التفاعل مع أصحاب المصلحة لاكتشاف متطلباتهم ومتطلبات المجال" data-en="Requirements discovery: interacting with stakeholders to discover requirements & domain requirements">اكتشاف المتطلبات (Requirements discovery): التفاعل مع أصحاب المصلحة لاكتشاف متطلباتهم ومتطلبات المجال</li>
+      <li data-ar="تصنيف وتنظيم المتطلبات: تجميع المتطلبات المترابطة في مجموعات متماسكة، غالبًا بحسب البنية المعمارية للنظام" data-en="Classification & organization: grouping related requirements into coherent clusters, often by system architecture">تصنيف وتنظيم المتطلبات: تجميع المتطلبات المترابطة في مجموعات متماسكة، غالبًا بحسب البنية المعمارية للنظام</li>
+      <li data-ar="ترتيب الأولويات والتفاوض: حل تعارضات المتطلبات بين أصحاب المصلحة المختلفين" data-en="Prioritization & negotiation: resolving conflicts among multiple stakeholders">ترتيب الأولويات والتفاوض: حل تعارضات المتطلبات بين أصحاب المصلحة المختلفين</li>
+      <li data-ar="توثيق المتطلبات (Specification): تُكتب المتطلبات وتُدخَل للجولة التالية من الحلزون" data-en="Specification: requirements documented and fed into the next round of the spiral">توثيق المتطلبات (Specification): تُكتب المتطلبات وتُدخَل للجولة التالية من الحلزون</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="تقنيات استخراج المتطلبات" data-en="Requirements Elicitation Techniques">تقنيات استخراج المتطلبات</h3>
+    <ul>
+      <li><b data-ar="المقابلات (Interviewing): " data-en="Interviewing: ">المقابلات (Interviewing): </b><span data-ar="نوعان: مغلقة (أسئلة محددة مسبقًا) ومفتوحة (بلا أجندة محددة، استكشاف القضايا). جيدة لفهم عمل أصحاب المصلحة عمومًا، لكنها ضعيفة في فهم متطلبات المجال الدقيقة لأن الخبراء قد لا يعتبرون بعض المعرفة جديرة بالذكر." data-en="Two types: closed (predetermined questions) and open (no fixed agenda). Good for general understanding, but weak for domain-specific knowledge because experts may not think to mention what's obvious to them.">نوعان: مغلقة (أسئلة محددة مسبقًا) ومفتوحة (بلا أجندة محددة، استكشاف القضايا). جيدة لفهم عمل أصحاب المصلحة عمومًا، لكنها ضعيفة في فهم متطلبات المجال الدقيقة لأن الخبراء قد لا يعتبرون بعض المعرفة جديرة بالذكر.</span></li>
+      <li><b data-ar="السيناريوهات (Scenarios): " data-en="Scenarios: ">السيناريوهات (Scenarios): </b><span data-ar="أمثلة واقعية لكيفية استخدام النظام، تشمل الوضع الابتدائي، التدفق الطبيعي للأحداث، ما قد يحدث من أخطاء، أنشطة متزامنة أخرى، ووصف الحالة النهائية." data-en="Real-life usage examples covering starting situation, normal flow of events, what can go wrong, concurrent activities, and ending state.">أمثلة واقعية لكيفية استخدام النظام، تشمل الوضع الابتدائي، التدفق الطبيعي للأحداث، ما قد يحدث من أخطاء، أنشطة متزامنة أخرى، ووصف الحالة النهائية.</span></li>
+      <li><b data-ar="حالات الاستخدام (Use Cases): " data-en="Use Cases: ">حالات الاستخدام (Use Cases): </b><span data-ar="تقنية سيناريو في UML تحدد الجهات الفاعلة (actors) وتصف التفاعل، مدعومة برسومات عالية المستوى ووصف جدولي تفصيلي." data-en="A scenario-based UML technique identifying actors and describing interactions, supported by high-level diagrams plus detailed tabular descriptions.">تقنية سيناريو في UML تحدد الجهات الفاعلة (actors) وتصف التفاعل، مدعومة برسومات عالية المستوى ووصف جدولي تفصيلي.</span></li>
+      <li><b data-ar="الإثنوغرافيا (Ethnography): " data-en="Ethnography: ">الإثنوغرافيا (Ethnography): </b><span data-ar="عالم اجتماعي يلاحظ ويحلل كيفية عمل الناس فعليًا دون أن يضطروا للشرح. تكشف متطلبات ناتجة عن طريقة العمل الفعلية وليس الموثَّقة رسميًا، لكنها لا تستطيع اكتشاف ميزات جديدة." data-en="A social scientist observes/analyses how people actually work without requiring explanation. Reveals implicit requirements from real practice, but cannot identify new features.">عالم اجتماعي يلاحظ ويحلل كيفية عمل الناس فعليًا دون أن يضطروا للشرح. تكشف متطلبات ناتجة عن طريقة العمل الفعلية وليس الموثَّقة رسميًا، لكنها لا تستطيع اكتشاف ميزات جديدة.</span></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="التحقق من صحة المتطلبات (Requirements Validation)" data-en="Requirements Validation">التحقق من صحة المتطلبات (Requirements Validation)</h3>
+    <p data-ar="يهدف إلى إثبات أن المتطلبات تُعرّف النظام الذي يريده العميل فعلًا. تكلفة الخطأ في المتطلبات عالية: قد يصل إصلاح خطأ بعد التسليم إلى 100 ضعف تكلفة إصلاحه في التنفيذ." data-en="Aims to demonstrate the requirements define the system the customer really wants. Requirement errors are costly: fixing one after delivery can cost up to 100x the cost of fixing an implementation error.">
+    يهدف إلى إثبات أن المتطلبات تُعرّف النظام الذي يريده العميل فعلًا. تكلفة الخطأ في المتطلبات عالية: قد يصل إصلاح خطأ بعد التسليم إلى 100 ضعف تكلفة إصلاحه في التنفيذ.
+    </p>
+    <h3 style="margin-top:14px" data-ar="فحوصات التحقق" data-en="Validation Checks">فحوصات التحقق</h3>
+    <ul>
+      <li data-ar="الصلاحية Validity: هل يوفّر النظام الوظائف التي تخدم احتياجات العميل وكل أصحاب المصلحة؟" data-en="Validity: does the system provide functions that best support customer needs (all stakeholders)?">الصلاحية Validity: هل يوفّر النظام الوظائف التي تخدم احتياجات العميل وكل أصحاب المصلحة؟</li>
+      <li data-ar="الاتساق Consistency: هل توجد تعارضات بين المتطلبات؟" data-en="Consistency: any requirement conflicts?">الاتساق Consistency: هل توجد تعارضات بين المتطلبات؟</li>
+      <li data-ar="الاكتمال Completeness: هل كل الوظائف المطلوبة من العميل مُضمَّنة؟" data-en="Completeness: are all functions required by the customer included?">الاكتمال Completeness: هل كل الوظائف المطلوبة من العميل مُضمَّنة؟</li>
+      <li data-ar="الواقعية Realism: هل يمكن تنفيذ المتطلبات بالميزانية والتقنية المتاحة؟" data-en="Realism: can requirements be implemented given available budget/technology?">الواقعية Realism: هل يمكن تنفيذ المتطلبات بالميزانية والتقنية المتاحة؟</li>
+      <li data-ar="قابلية التحقق Verifiability: هل يمكن كتابة اختبارات تثبت تحقق كل متطلب؟" data-en="Verifiability: can a set of tests demonstrate each requirement is met?">قابلية التحقق Verifiability: هل يمكن كتابة اختبارات تثبت تحقق كل متطلب؟</li>
+    </ul>
+    <h3 style="margin-top:14px" data-ar="تقنيات التحقق" data-en="Validation Techniques">تقنيات التحقق</h3>
+    <ul>
+      <li data-ar="مراجعات المتطلبات (Reviews): تحليل يدوي منهجي من فريق مراجعين يبحثون عن الأخطاء والتعارضات" data-en="Reviews: systematic manual analysis by a review team checking for errors/inconsistencies">مراجعات المتطلبات (Reviews): تحليل يدوي منهجي من فريق مراجعين يبحثون عن الأخطاء والتعارضات</li>
+      <li data-ar="النمذجة الأولية (Prototyping): استخدام نموذج قابل للتنفيذ لفحص المتطلبات مع المستخدمين والعملاء" data-en="Prototyping: using an executable model to check requirements with users/clients">النمذجة الأولية (Prototyping): استخدام نموذج قابل للتنفيذ لفحص المتطلبات مع المستخدمين والعملاء</li>
+      <li data-ar="توليد حالات الاختبار (Test-case generation): تطوير اختبارات للمتطلبات لفحص قابليتها للاختبار" data-en="Test-case generation: developing tests for requirements to check testability">توليد حالات الاختبار (Test-case generation): تطوير اختبارات للمتطلبات لفحص قابليتها للاختبار</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="إدارة المتطلبات (Requirements Management)" data-en="Requirements Management">إدارة المتطلبات (Requirements Management)</h3>
+    <p data-ar="عملية إدارة المتطلبات المتغيرة أثناء هندسة المتطلبات وتطوير النظام. تظهر متطلبات جديدة أثناء التطوير وحتى بعد الاستخدام، لذا يجب تتبع المتطلبات الفردية والروابط بينها لتقييم أثر أي تغيير، وإنشاء عملية رسمية لمقترحات التغيير." data-en="Managing changing requirements during RE and system development. New requirements emerge during and after development, so individual requirements and their links must be tracked to assess change impact, with a formal change-proposal process.">
+    عملية إدارة المتطلبات المتغيرة أثناء هندسة المتطلبات وتطوير النظام. تظهر متطلبات جديدة أثناء التطوير وحتى بعد الاستخدام، لذا يجب تتبع المتطلبات الفردية والروابط بينها لتقييم أثر أي تغيير، وإنشاء عملية رسمية لمقترحات التغيير.
+    </p>
+  </div>
+
+  <div class="key-points">
+    <h3 data-ar="✅ نقاط مفتاحية - الفصل 4" data-en="✅ Key Points - Chapter 4">✅ نقاط مفتاحية - الفصل 4</h3>
+    <ul>
+      <li data-ar="وثيقة المتطلبات هي بيان متفق عليه لمتطلبات النظام، ويجب تنظيمها لخدمة العملاء والمطورين معًا." data-en="The requirements document is an agreed statement, organized to serve both customers and developers.">وثيقة المتطلبات هي بيان متفق عليه لمتطلبات النظام، ويجب تنظيمها لخدمة العملاء والمطورين معًا.</li>
+      <li data-ar="عملية هندسة المتطلبات تكرارية وتشمل الاستخراج، التحديد، والتحقق." data-en="The RE process is iterative, including elicitation, specification, and validation.">عملية هندسة المتطلبات تكرارية وتشمل الاستخراج، التحديد، والتحقق.</li>
+      <li data-ar="يمكن تمثيل الاستخراج والتحليل كحلزون من الأنشطة: الاكتشاف، التصنيف، التفاوض، التوثيق." data-en="Elicitation/analysis can be represented as a spiral: discovery, classification, negotiation, documentation.">يمكن تمثيل الاستخراج والتحليل كحلزون من الأنشطة: الاكتشاف، التصنيف، التفاوض، التوثيق.</li>
+      <li data-ar="التحقق يفحص الصلاحية، الاتساق، الاكتمال، الواقعية، وقابلية التحقق." data-en="Validation checks validity, consistency, completeness, realism, and verifiability.">التحقق يفحص الصلاحية، الاتساق، الاكتمال، الواقعية، وقابلية التحقق.</li>
+      <li data-ar="التغيرات التجارية والتنظيمية والتقنية تؤدي حتمًا لتغير المتطلبات، وإدارتها هي السيطرة على هذه التغيرات." data-en="Business, organizational, and technical changes inevitably alter requirements; requirements management controls these changes.">التغيرات التجارية والتنظيمية والتقنية تؤدي حتمًا لتغير المتطلبات، وإدارتها هي السيطرة على هذه التغيرات.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== CHAPTER 8 ===================== -->
+<section class="chapter" id="ch8">
+  <h2 class="chapter-title" data-ar="الفصل 8: اختبار البرمجيات (Software Testing)" data-en="Chapter 8: Software Testing">الفصل 8: اختبار البرمجيات (Software Testing)</h2>
+
+  <div class="section">
+    <h3 data-ar="لماذا يهم الاختبار؟" data-en="Why Testing is Important">لماذا يهم الاختبار؟</h3>
+    <ul>
+      <li data-ar="بنك في شيكاغو أخطأ فزاد رصيد 800 عميل بمبلغ إجمالي 763 مليار دولار بسبب خطأ برمجي." data-en="An error at a Chicago bank increased the balance of 800 customers by a total of $763 billion.">بنك في شيكاغو أخطأ فزاد رصيد 800 عميل بمبلغ إجمالي 763 مليار دولار بسبب خطأ برمجي.</li>
+      <li data-ar="جهاز Therac-25 للعلاج الإشعاعي تسبب بتعرض 6 أشخاص لجرعات زائدة من الإشعاع، توفي 3 منهم، بسبب استبدال أقفال الأمان الصلبة (hardware) بأقفال برمجية دون اختبار كافٍ (1985-1987)." data-en="The Therac-25 radiation therapy device exposed 6 people to radiation overdoses (3 died) after replacing hardware safety locks with untested software locks (1985–1987).">جهاز Therac-25 للعلاج الإشعاعي تسبب بتعرض 6 أشخاص لجرعات زائدة من الإشعاع، توفي 3 منهم، بسبب استبدال أقفال الأمان الصلبة (hardware) بأقفال برمجية دون اختبار كافٍ (1985-1987).</li>
+      <li data-ar="صاروخ Ariane-5 (1996) انفجر أثناء الإطلاق بسبب نقص اختبار برمجيات الملاحة، مما أدى لتسارع زائد أثر على المتغيرات، فاضطروا لتفجيره." data-en="The Ariane-5 rocket (1996) exploded during flight due to inadequately tested navigation software, forcing self-destruction.">صاروخ Ariane-5 (1996) انفجر أثناء الإطلاق بسبب نقص اختبار برمجيات الملاحة، مما أدى لتسارع زائد أثر على المتغيرات، فاضطروا لتفجيره.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="اختبار البرنامج (Program Testing)" data-en="Program Testing">اختبار البرنامج (Program Testing)</h3>
+    <p data-ar="يهدف الاختبار لإثبات أن البرنامج يفعل ما هو مطلوب منه ولاكتشاف العيوب قبل الاستخدام. عند الاختبار: تنفّذ البرنامج ببيانات اصطناعية وتتحقق من النتائج بحثًا عن أخطاء أو شذوذ. الاختبار جزء من عملية التحقق والتثبت (V&V) الأوسع التي تشمل أيضًا تقنيات التحقق الساكنة." data-en="Testing aims to show a program does what it should and to discover defects before use. You execute the program with artificial data and check results for errors/anomalies. Testing is part of broader V&V, which also includes static verification techniques.">
+    يهدف الاختبار لإثبات أن البرنامج يفعل ما هو مطلوب منه ولاكتشاف العيوب قبل الاستخدام. عند الاختبار: تنفّذ البرنامج ببيانات اصطناعية وتتحقق من النتائج بحثًا عن أخطاء أو شذوذ. الاختبار جزء من عملية التحقق والتثبت (V&V) الأوسع التي تشمل أيضًا تقنيات التحقق الساكنة.
+    </p>
+    <p class="quote" data-ar="⚠️ الاختبار يكشف وجود الأخطاء، وليس غيابها." data-en="⚠️ Testing can reveal the presence of errors, NOT their absence.">⚠️ الاختبار يكشف وجود الأخطاء، وليس غيابها.</p>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="هدفا الاختبار" data-en="Two Testing Goals">هدفا الاختبار</h3>
+    <ul>
+      <li><b data-ar="اختبار التحقق من المطابقة (Validation testing): " data-en="Validation testing: ">اختبار التحقق من المطابقة (Validation testing): </b><span data-ar="لإثبات للمطوّر والعميل أن النظام يطابق متطلباته. نجاح الاختبار يعني أن النظام يعمل كما هو متوقع." data-en="To demonstrate to developer and customer the software meets its requirements. A successful test shows the system operates as intended.">لإثبات للمطوّر والعميل أن النظام يطابق متطلباته. نجاح الاختبار يعني أن النظام يعمل كما هو متوقع.</span></li>
+      <li><b data-ar="اختبار اكتشاف العيوب (Defect testing): " data-en="Defect testing: ">اختبار اكتشاف العيوب (Defect testing): </b><span data-ar="يهدف لاكتشاف عيوب في سلوك النظام. حالات الاختبار هنا مصممة عمدًا لتكون غامضة وغير عادية. نجاح الاختبار يعني أنه أظهر سلوكًا خاطئًا (كشف عيبًا)." data-en="Aims to discover defects in software behavior; test cases are deliberately obscure. A successful test exposes incorrect behavior (a defect).">يهدف لاكتشاف عيوب في سلوك النظام. حالات الاختبار هنا مصممة عمدًا لتكون غامضة وغير عادية. نجاح الاختبار يعني أنه أظهر سلوكًا خاطئًا (كشف عيبًا).</span></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="التحقق (Verification) مقابل التثبت (Validation)" data-en="Verification vs Validation">التحقق (Verification) مقابل التثبت (Validation)</h3>
+    <div class="grid2">
+      <div class="mini-card">
+        <b data-ar="Verification: 'هل نبني المنتج بشكل صحيح؟'" data-en="Verification: 'Are we building the product right?'">Verification: 'هل نبني المنتج بشكل صحيح؟'</b>
+        <p data-ar="هدفها التأكد أن البرنامج يحقق متطلباته الوظيفية وغير الوظيفية المُعلنة." data-en="Aims to check the software meets its stated functional and non-functional requirements.">هدفها التأكد أن البرنامج يحقق متطلباته الوظيفية وغير الوظيفية المُعلنة.</p>
+      </div>
+      <div class="mini-card">
+        <b data-ar="Validation: 'هل نبني المنتج الصحيح؟'" data-en="Validation: 'Are we building the right product?'">Validation: 'هل نبني المنتج الصحيح؟'</b>
+        <p data-ar="هدفها ضمان أن البرنامج يلبي توقعات العميل الفعلية، وليس فقط مطابقة المواصفات، لأن المواصفات لا تعكس دائمًا الرغبة الحقيقية للمستخدم." data-en="Aims to ensure the software meets the customer's real expectations — beyond just matching the spec, since specs don't always reflect true user needs.">هدفها ضمان أن البرنامج يلبي توقعات العميل الفعلية، وليس فقط مطابقة المواصفات، لأن المواصفات لا تعكس دائمًا الرغبة الحقيقية للمستخدم.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="مستوى الثقة المطلوب (V&V Confidence)" data-en="V&V Confidence">مستوى الثقة المطلوب (V&V Confidence)</h3>
+    <p data-ar="الهدف من V&V هو بناء ثقة بأن النظام 'مناسب للغرض المقصود'. مستوى الثقة المطلوب يعتمد على:" data-en="The aim of V&V is to establish confidence the system is 'fit for purpose'. Required confidence depends on:">
+    الهدف من V&V هو بناء ثقة بأن النظام 'مناسب للغرض المقصود'. مستوى الثقة المطلوب يعتمد على:
+    </p>
+    <ul>
+      <li data-ar="غرض البرنامج: كلما كان النظام أكثر حساسية (مثل الأنظمة الحرجة للسلامة)، زادت الحاجة للموثوقية" data-en="Software purpose: the more critical the system (e.g. safety-critical), the higher the required reliability">غرض البرنامج: كلما كان النظام أكثر حساسية (مثل الأنظمة الحرجة للسلامة)، زادت الحاجة للموثوقية</li>
+      <li data-ar="توقعات المستخدمين: قد يكون لديهم توقعات منخفضة بسبب خبراتهم السابقة مع برمجيات غير موثوقة، لكن مع نضج النظام تزداد توقعاتهم" data-en="User expectations: may be low due to past experience with buggy software, but rise as the system matures">توقعات المستخدمين: قد يكون لديهم توقعات منخفضة بسبب خبراتهم السابقة مع برمجيات غير موثوقة، لكن مع نضج النظام تزداد توقعاتهم</li>
+      <li data-ar="بيئة السوق: قد تكون السرعة في طرح المنتج بالسوق أهم من اكتشاف كل العيوب، خصوصًا في بيئة تنافسية" data-en="Marketing environment: getting to market early may matter more than finding every defect, especially competitively">بيئة السوق: قد تكون السرعة في طرح المنتج بالسوق أهم من اكتشاف كل العيوب، خصوصًا في بيئة تنافسية</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="التفتيش (Inspections) مقابل الاختبار (Testing)" data-en="Inspections vs Testing">التفتيش (Inspections) مقابل الاختبار (Testing)</h3>
+    <ul>
+      <li data-ar="التفتيش البرمجي (Static V&V): تحليل التمثيل الساكن للنظام (المتطلبات، التصميم، الكود، حتى الاختبارات المقترحة) لاكتشاف المشاكل دون تنفيذ النظام." data-en="Software inspections (static verification): analysing the static system representation (requirements, design, code, even proposed tests) without executing it.">التفتيش البرمجي (Static V&V): تحليل التمثيل الساكن للنظام (المتطلبات، التصميم، الكود، حتى الاختبارات المقترحة) لاكتشاف المشاكل دون تنفيذ النظام.</li>
+      <li data-ar="الاختبار البرمجي (Dynamic V&V): تنفيذ النظام ببيانات اختبار ومراقبة سلوكه التشغيلي." data-en="Software testing (dynamic verification): the system is executed with test data and its behavior observed.">الاختبار البرمجي (Dynamic V&V): تنفيذ النظام ببيانات اختبار ومراقبة سلوكه التشغيلي.</li>
+      <li data-ar="التفتيش والاختبار تقنيتان مكمّلتان وليستا متعارضتين؛ يجب استخدام كليهما." data-en="Inspections and testing are complementary, not opposing, techniques — both should be used.">التفتيش والاختبار تقنيتان مكمّلتان وليستا متعارضتين؛ يجب استخدام كليهما.</li>
+      <li data-ar="التفتيش يفحص المطابقة للمواصفات لكن ليس بالضرورة متطلبات العميل الحقيقية، ولا يفحص خصائص غير وظيفية كالأداء وقابلية الاستخدام." data-en="Inspections check conformance with spec but not necessarily the customer's real needs, and cannot check non-functional characteristics like performance or usability.">التفتيش يفحص المطابقة للمواصفات لكن ليس بالضرورة متطلبات العميل الحقيقية، ولا يفحص خصائص غير وظيفية كالأداء وقابلية الاستخدام.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="مراحل الاختبار الثلاث" data-en="Three Stages of Testing">مراحل الاختبار الثلاث</h3>
+    <ul>
+      <li><b data-ar="اختبار التطوير (Development testing): " data-en="Development testing: ">اختبار التطوير (Development testing): </b><span data-ar="يُجرى أثناء التطوير لاكتشاف الأخطاء والعيوب." data-en="System tested during development to discover bugs and defects.">يُجرى أثناء التطوير لاكتشاف الأخطاء والعيوب.</span></li>
+      <li><b data-ar="اختبار الإصدار (Release testing): " data-en="Release testing: ">اختبار الإصدار (Release testing): </b><span data-ar="فريق اختبار منفصل يختبر نسخة كاملة قبل إصدارها للمستخدمين، للتأكد من مطابقة متطلبات أصحاب المصلحة." data-en="A separate testing team tests a complete version before release, to check the system meets stakeholder requirements.">فريق اختبار منفصل يختبر نسخة كاملة قبل إصدارها للمستخدمين، للتأكد من مطابقة متطلبات أصحاب المصلحة.</span></li>
+      <li><b data-ar="اختبار المستخدم (User testing): " data-en="User testing: ">اختبار المستخدم (User testing): </b><span data-ar="المستخدمون الفعليون أو المحتملون يختبرون النظام في بيئتهم الخاصة. اختبار القبول (Acceptance testing) نوع منه حيث يختبر العميل النظام رسميًا ليقرر قبوله." data-en="Users or potential users test the system in their own environment. Acceptance testing is a type where the customer formally tests the system to decide whether to accept it.">المستخدمون الفعليون أو المحتملون يختبرون النظام في بيئتهم الخاصة. اختبار القبول (Acceptance testing) نوع منه حيث يختبر العميل النظام رسميًا ليقرر قبوله.</span></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="اختبار التطوير بالتفصيل" data-en="Development Testing in Detail">اختبار التطوير بالتفصيل</h3>
+    <ul>
+      <li><b data-ar="اختبار الوحدة (Unit testing): " data-en="Unit testing: ">اختبار الوحدة (Unit testing): </b><span data-ar="اختبار وحدات أو فئات (classes) فردية، يركّز على اختبار وظيفة الكائنات أو الدوال." data-en="Testing individual program units/object classes; focuses on testing the functionality of objects/methods.">اختبار وحدات أو فئات (classes) فردية، يركّز على اختبار وظيفة الكائنات أو الدوال.</span></li>
+      <li><b data-ar="اختبار المكوّن (Component testing): " data-en="Component testing: ">اختبار المكوّن (Component testing): </b><span data-ar="دمج عدة وحدات لتكوين مكونات مركّبة، يركّز على اختبار واجهات المكونات." data-en="Several units integrated into composite components; focuses on testing component interfaces.">دمج عدة وحدات لتكوين مكونات مركّبة، يركّز على اختبار واجهات المكونات.</span></li>
+      <li><b data-ar="اختبار النظام (System testing): " data-en="System testing: ">اختبار النظام (System testing): </b><span data-ar="دمج بعض أو كل مكونات النظام واختباره ككل، يركّز على اختبار تفاعل المكونات." data-en="Some or all components integrated and the system tested as a whole; focuses on testing component interactions.">دمج بعض أو كل مكونات النظام واختباره ككل، يركّز على اختبار تفاعل المكونات.</span></li>
+    </ul>
+    <p data-ar="حيثما أمكن، يجب أتمتة اختبار الوحدة باستخدام إطار اختبار مثل JUnit، الذي يوفّر فئات اختبار عامة تُمدَّد لإنشاء حالات اختبار محددة، ويُشغّل كل الاختبارات ويُقدّم تقريرًا عن نجاحها." data-en="Whenever possible unit testing should be automated using a test automation framework like JUnit, which provides generic test classes you extend to create specific test cases and reports on success.">
+    حيثما أمكن، يجب أتمتة اختبار الوحدة باستخدام إطار اختبار مثل JUnit، الذي يوفّر فئات اختبار عامة تُمدَّد لإنشاء حالات اختبار محددة، ويُشغّل كل الاختبارات ويُقدّم تقريرًا عن نجاحها.
+    </p>
+  </div>
+
+  <div class="section">
+    <h3 data-ar="إرشادات عامة للاختبار" data-en="General Testing Guidelines">إرشادات عامة للاختبار</h3>
+    <ul>
+      <li data-ar="اختيار مدخلات تُجبر النظام على توليد كل رسائل الخطأ" data-en="Choose inputs that force the system to generate all error messages">اختيار مدخلات تُجبر النظام على توليد كل رسائل الخطأ</li>
+      <li data-ar="تصميم مدخلات تسبب فيضان (overflow) في المخازن المؤقتة" data-en="Design inputs that cause buffer overflows">تصميم مدخلات تسبب فيضان (overflow) في المخازن المؤقتة</li>
+      <li data-ar="تكرار نفس المدخل أو سلسلة المدخلات عدة مرات" data-en="Repeat the same input or input sequence many times">تكرار نفس المدخل أو سلسلة المدخلات عدة مرات</li>
+      <li data-ar="إجبار توليد مخرجات غير صحيحة" data-en="Force invalid outputs to be generated">إجبار توليد مخرجات غير صحيحة</li>
+      <li data-ar="إجبار نتائج حسابية لتكون كبيرة جدًا أو صغيرة جدًا" data-en="Force computation results to be too large or too small">إجبار نتائج حسابية لتكون كبيرة جدًا أو صغيرة جدًا</li>
+    </ul>
+  </div>
+
+  <div class="key-points">
+    <h3 data-ar="✅ نقاط مفتاحية - الفصل 8" data-en="✅ Key Points - Chapter 8">✅ نقاط مفتاحية - الفصل 8</h3>
+    <ul>
+      <li data-ar="الاختبار يكشف وجود الأخطاء فقط، ولا يستطيع إثبات عدم وجود عيوب متبقية." data-en="Testing can only show the presence of errors, never their absence.">الاختبار يكشف وجود الأخطاء فقط، ولا يستطيع إثبات عدم وجود عيوب متبقية.</li>
+      <li data-ar="اختبار التطوير مسؤولية فريق التطوير، بينما يجب أن يتولى فريق منفصل اختبار النظام قبل تسليمه للعملاء." data-en="Development testing is the responsibility of the dev team; a separate team should test before release to customers.">اختبار التطوير مسؤولية فريق التطوير، بينما يجب أن يتولى فريق منفصل اختبار النظام قبل تسليمه للعملاء.</li>
+      <li data-ar="يشمل اختبار التطوير: اختبار الوحدة (كائنات/دوال فردية)، اختبار المكوّن (مجموعات مترابطة)، واختبار النظام (أجزاء أو النظام الكامل)." data-en="Development testing includes unit testing (individual objects/methods), component testing (related groups), and system testing (partial or complete systems).">يشمل اختبار التطوير: اختبار الوحدة (كائنات/دوال فردية)، اختبار المكوّن (مجموعات مترابطة)، واختبار النظام (أجزاء أو النظام الكامل).</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer id="footerText" data-ar="ملخص دراسي مُعد للمراجعة النهائية — Software Engineering (Sommerville)" data-en="Study summary prepared for final review — Software Engineering (Sommerville)">
+ملخص دراسي مُعد للمراجعة النهائية — Software Engineering (Sommerville)
+</footer>
+
+<script>
+let currentLang = 'ar';
+
+function setLang(lang){
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.getElementById('btnAr').classList.toggle('active', lang==='ar');
+  document.getElementById('btnEn').classList.toggle('active', lang==='en');
+
+  document.querySelectorAll('[data-ar]').forEach(el=>{
+    const val = lang === 'ar' ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+    if(val !== null) el.textContent = val;
+  });
+
+  document.getElementById('mainTitle').textContent = lang==='ar'
+    ? 'ملخص شامل للفاينل — Software Engineering'
+    : 'Comprehensive Final Summary — Software Engineering';
+  document.getElementById('subTitle').textContent = lang==='ar'
+    ? 'الفصل 3: Agile · الفصل 4: Requirements Engineering · الفصل 8: Software Testing'
+    : 'Chapter 3: Agile · Chapter 4: Requirements Engineering · Chapter 8: Software Testing';
+
+  localStorage_safe();
+}
+
+function localStorage_safe(){
+  // no-op: persistent storage intentionally not used per artifact rules
+}
+
+function showChapter(id){
+  document.querySelectorAll('.chapter').forEach(c=>c.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`.tab-btn[data-target="${id}"]`).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// init
+document.documentElement.dir = 'rtl';
+</script>
+
+</body>
+</html>
